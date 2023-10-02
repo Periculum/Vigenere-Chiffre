@@ -20,7 +20,7 @@ It will return NHDESIOAHOWALURRQG.
 
 ### Decrypting
 
-If you want to decrypt the message NHDESIOAHOWALURRQG, the command would look like this:
+If you want to decrypt the message NHDESIOAHOWALURRQG:
 ```
 python3 vigenere.py d NHDESIOAHOWALURRQG CTMAGAZIN
 ```
