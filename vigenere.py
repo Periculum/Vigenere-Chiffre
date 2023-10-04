@@ -1,47 +1,51 @@
 #!/usr/bin/env python3
-import string
+
 from argparse import ArgumentParser
+import re
 
-class Vigenere:
-    def __init__(self, key, text):
-        self.alphabet = list(string.ascii_uppercase)
-        self.key = key
-        self.text = text
+class VigenereCodec:
+    def __init__(self, key, alphabet="ABCDEFGHIJKLMNOPQRSTUWXYZ"):
+        self.abc = alphabet
+        self.key = key.upper()
+        if re.match(f"[^{self.abc}]", self.key):
+            raise ValueError("Illegal characters in key")
 
 
-    def use_Vigenere(self, mode):
-        result = ''
-        for i in range(len(self.text)):
-            key_value = self.alphabet.index(self.key[i % len(self.key)])
-            text_value = self.alphabet.index(self.text[i])
+    def process(self, mode, text):
+        text = re.sub(f"[^{self.abc}]", "", text.upper())
+        key_len = len(self.key)
+        result = ""
+        for i in range(len(text)):
+            key_value = self.abc.index(self.key[i % key_len])
+            text_value = self.abc.index(text[i])
             # choose between (e)ncrypt and (d)ecrypt
-            if mode == 'e':
-                value = (text_value + key_value) % len(self.alphabet)
-                result += self.alphabet[value]
+            if mode == "e":
+                value = (text_value + key_value) % len(self.abc)
+                result += self.abc[value]
             else:
-                value = (text_value - key_value) % len(self.alphabet)
-                result += self.alphabet[value]
+                value = (text_value - key_value) % len(self.abc)
+                result += self.abc[value]
 
         return result
 
 
 def main():
     # parsing arguments
-    parser = ArgumentParser(prog='Vigenere', description='Encrypting and Decrypting with the Vigenere Chiffre')
+    parser = ArgumentParser(
+        prog='Vigenere',
+        description='Encrypt and decrypt with the Vigenère cipher')
     parser.add_argument('operation', choices=['e', 'd'])
-    parser.add_argument('text', help="Use \" around the text if you want to enter with spaces.")
+    parser.add_argument('text', 
+        help="Use \" around the text if you want to enter with spaces.")
     parser.add_argument('key')
     args = parser.parse_args()
 
-    # remove all spaces and use just upper case
-    text = args.text.upper().replace(" ","")
-
     # initialise keyword and text
-    vig = Vigenere(args.key, text)
+    vig = VigenereCodec(args.key)
     if args.operation == 'e':
-        print(f'Plain Text: ', vig.use_Vigenere(args.operation))
+        print(f'Encoded: ', vig.process(args.operation, args.text))
     else:
-        print(f'Chiffre: ', vig.use_Vigenere(args.operation))
+        print(f'Decoded: ', vig.process(args.operation, args.text))
 
 
 if __name__ == '__main__':
