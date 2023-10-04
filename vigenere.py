@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 from argparse import ArgumentParser
 import re
 
@@ -40,7 +39,7 @@ def main():
     parser.add_argument('key')
     args = parser.parse_args()
 
-    # initialise keyword and text
+    # initialise keyword
     vig = VigenereCodec(args.key)
     if args.operation == 'e':
         print(f'Encoded: ', vig.process(args.operation, args.text))
