@@ -1,32 +1,42 @@
-# Vigenere-Chiffre
-Simple [Vigenere-Chiffre](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher) with on keyword and an implementation of the Kasiski-Test to find the length of the keyword (ToDo).
+# Vigenère Cipher
 
-### Usage
+Simple Python implementation of the [Vigenère cipher](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher).
 
-You will need python to execute the Code.
+## Prerequisites
 
-There are a total of three parameters that the program can take. d/e for decode or encode, followed by the text and the keyword. Note: The program removes all spaces and other chars from the text and turns it into one with only uppercase letters.
+- Python 3
+ 
+## Usage
+
+There are a total of three parameters the program can take. d/e for decode or encode, followed by the text and the keyword:
+
 ```
 python3 vigenere.py <d/e> <text> <keyword>
 ```
-On Windows you dont need to write ```python3 [...]```, ```python [...]``` is enough.
+
+Note: The program removes all spaces and other characters from the text and turns it into one with only uppercase letters:
+
+Windows users: On Windows you don't need to write `python3 ...`, `python ...` is enough.
+
 ### Encrypting
 
-If you want to encrypt the text "Lorem ipsum dolor sit" with the keywords "CTMAGAZIN", the command would look like this:
+To encrypt the text `Lorem ipsum dolor sit` with the keyword `CTMAGAZIN`, simply type:
+
 ```
 python3 vigenere.py e "Lorem ipsum dolor sit" CTMAGAZIN
 ```
 
-It will return NHDESIOAHOWALURRQG.
+This will return `NHDESIOAHOWALURRQG`.
 
 ### Decrypting
 
-If you want to decrypt the message NHDESIOAHOWALURRQG:
+To decrypt the message `NHDESIOAHOWALURRQG` type:
+
 ```
 python3 vigenere.py d NHDESIOAHOWALURRQG CTMAGAZIN
 ```
 
-The output is LOREMIPSUMDOLORSIT.
+The output is `LOREMIPSUMDOLORSIT`.
 
 ### Copyright
 
