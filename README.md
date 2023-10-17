@@ -38,6 +38,21 @@ python3 vigenere.py d NHDESIOAHOWALURRQG CTMAGAZIN
 
 The output is `LOREMIPSUMDOLORSIT`.
 
+### Modification
+
+You can modify the program to decrypt and encrypt whatever you like. You just need to remove ```.upper()``` from the line ```text = re.sub(f"[^{self.abc}]", "", text.upper())``` and add letters to ```alphabet``` like that:
+```
+alphabet="ABCDEFGHIJKLMNOPQRSTUWXYZabcdefghijklmnopqrstuvwxyz0123456789,. '"
+```
+Now you can use more chars like shown in this example:
+```
+python3 vigenere.py e "Die c't ist dieses Jahr 40 geworden." CTMAGAZIN
+Encoded:  F1q i'DGvu KdoeCm5Admhx O8Lix8oxd2vK
+
+python3 vigenere.py d "F1q i'DGvu KdoeCm5Admhx O8Lix8oxd2vK" CTMAGAZIN
+Decoded:  Die c't ist dieses Jahr 40 geworden.
+```
+
 ### Copyright
 
 Copyright ©️ 2023 Wilhelm Drehling, Heise Medien GmbH & Co. KG
