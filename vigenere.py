@@ -3,7 +3,7 @@ from argparse import ArgumentParser
 import re
 
 class VigenereCodec:
-    def __init__(self, key, alphabet="ABCDEFGHIJKLMNOPQRSTUWXYZ"):
+    def __init__(self, key, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
         self.abc = alphabet
         self.key = key.upper()
         if re.match(f"[^{self.abc}]", self.key):
