@@ -42,14 +42,14 @@ The output is `LOREMIPSUMDOLORSIT`.
 
 You can modify the program to decrypt and encrypt whatever you like. You just need to remove ```.upper()``` from the line ```text = re.sub(f"[^{self.abc}]", "", text.upper())``` and add letters to ```alphabet``` like that:
 ```
-alphabet="ABCDEFGHIJKLMNOPQRSTUWXYZabcdefghijklmnopqrstuvwxyz0123456789,. '"
+alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,. '"
 ```
 Now you can use more chars like shown in this example:
 ```
 python3 vigenere.py e "Die c't ist dieses Jahr 40 geworden." CTMAGAZIN
-Encoded:  F1q i'DGvu KdoeCm5Admhx O8Lix8oxd2vK
+Encoded:  F1q i'EGvu KdoeDm5Acmhx P8Lix8oxd3vK
 
-python3 vigenere.py d "F1q i'DGvu KdoeCm5Admhx O8Lix8oxd2vK" CTMAGAZIN
+python3 vigenere.py d "F1q i'EGvu KdoeDm5Acmhx P8Lix8oxd3vK" CTMAGAZIN
 Decoded:  Die c't ist dieses Jahr 40 geworden.
 ```
 
