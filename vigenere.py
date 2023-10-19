@@ -6,7 +6,8 @@ class VigenereCodec:
     def __init__(self, key, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
         self.abc = alphabet
         self.key = key.upper()
-        if re.match(f"[^{self.abc}]", self.key):
+        self.bad = re.compile(f"[^{re.escape(self.abc)}]")
+        if self.bad.search(self.key):
             raise ValueError("Illegal characters in key")
 
 
