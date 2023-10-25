@@ -1,7 +1,7 @@
 # Vigenère Cipher
 
 Simple Python implementation of the [Vigenère cipher](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher).
-
+An article on this cipher appeared in the german c't-magazin 25/2023 p.154. An online version can be found on [heise online](https://www.heise.de/hintergrund/Historische-Kryptografie-Vigenere-Chiffre-in-Python-programmiert-9339405.html).
 ## Prerequisites
 
 - Python 3
