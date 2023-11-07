@@ -5,6 +5,7 @@ import re
 class KasiskiTest:
     def __init__(self, text, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
         self.text = re.sub(f"[^{alphabet}]", "", text.upper())
+        self.abc = alphabet
 
 
     def find_distance_between_sequences(self):
@@ -53,40 +54,82 @@ class KasiskiTest:
         # Find the numbers with the highest frequency
         frequency = {}
         for num in range(len(prime_factors)):
-            buffer = prime_factors[num]
-            if buffer in frequency:
-                frequency[buffer] += 1
-            else:
-                frequency[buffer] = 1
+            prime_factor = prime_factors[num]
+            frequency[prime_factor] = frequency.get(prime_factor, 0) + 1          
 
         # sort frequency
         sorted_frequency = sorted(frequency.items(), key=lambda item: item[1], reverse=True)
         return sorted_frequency
+
+
+    def find_most_used_char(self, row, keylength):
+        # analyse frequency of chars in text
+        frequency = {}
+        for num in range(row, len(self.text), keylength):
+            fragment = self.text[num]
+            frequency[fragment] = frequency.get(fragment, 0) + 1
+
+        # sort frequency to get the char that appears the most
+        sorted_frequency = sorted(frequency.items(), key=lambda item: item[1], reverse=True)
+        return sorted_frequency[0][0]
+
+
+    def find_key(self, keylength):
+    	# construct possible key
+    	key = ""
+    	for element in range(keylength):
+    		letter = self.find_most_used_char(element, keylength)
+    		# decode
+    		shift = (self.abc.index(letter) - self.abc.index("E")) % len(self.abc)
+    		key += self.abc[shift]
+
+    	return key
+
 
     def attack(self):
         distances = self.find_distance_between_sequences()
         candidate_key_length = self.get_candidate_key_length(distances)
 
         for number, freq in candidate_key_length:
-            print(f"The factor {number} appeared {freq} times")
+            print(f"Factor {number} appeared {freq} times")
 
         if len(candidate_key_length) >= 2:
-            print(f"The Keylength is most likely {candidate_key_length[0][0]}, {candidate_key_length[1][0]} or a product of that.")
+            print(f"The key length is most likely {candidate_key_length[0][0]}, {candidate_key_length[1][0]} or a product of that.")
         else:
-            print(f"The Keylength is most likely {candidate_key_length[0][0]} or a product of that.")
+            print(f"The key length is most likely {candidate_key_length[0][0]} or a product of that.")
+
+        return candidate_key_length
+
+
+    def decode(self):
+    	user_input = input("Which key length do you want to test? (Format: 3 5 15)")
+    	for n in [int(n) for n in user_input.split()]:
+    		print(f"Possible Key: {self.find_key(n)}")
 
 
 def main():
     # parsing arguments
     parser = ArgumentParser(
         prog='Kasiski-Attack',
-        description='Find candidate key length for long Vigenere ciphers')
-    parser.add_argument('cipher',
+        description='Find possible key lengths for long Vigenere ciphers')
+    parser.add_argument('-a', '--analyse', required=False, action="store_true",
+        help="Evaluates key lengths and outputs a possible key for the length")
+    parser.add_argument('-f', '--file', required=False,
+                        help="file containing the cipher text")
+    parser.add_argument('cipher', nargs='?',
         help="Use \" around the text if you want to enter with spaces.")
     args = parser.parse_args()
 
-    kasiski = KasiskiTest(args.cipher)
-    kasiski.attack()
+    if args.file:
+        with open(args.file, 'r') as file:
+            cipher = file.read()
+    else:
+        cipher = args.cipher
+
+    kasiski = KasiskiTest(cipher)
+    candidate_key_length = kasiski.attack()
+    if args.analyse:
+        kasiski.decode()
 
 
 if __name__ == '__main__':
