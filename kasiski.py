@@ -95,8 +95,10 @@ class KasiskiTest:
 
         if len(candidate_key_length) >= 2:
             print(f"The key length is most likely {candidate_key_length[0][0]}, {candidate_key_length[1][0]} or a product of that.")
-        else:
+        elif len(candidate_key_length) == 1:
             print(f"The key length is most likely {candidate_key_length[0][0]} or a product of that.")
+        else:
+            print(f"No matching sequences found.")
 
         return candidate_key_length
 
