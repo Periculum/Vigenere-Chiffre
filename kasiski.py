@@ -29,7 +29,7 @@ class KasiskiTest:
         distances = []
         for seq, positions in sequences_cleaned.items():
             for i in range(len(positions) - 1):
-                distances.append((positions[i] - positions[i + 1]) * (-1))
+                distances.append((positions[i + 1] - positions[i]))
 
         return distances
 
