@@ -54,9 +54,9 @@ python3 vigenere.py d "F1q i'EGvu KdoeDm5Acmhx P8Lix8oxd3vK" CTMAGAZIN
 Decoded:  Die c't ist dieses Jahr 40 geworden.
 ```
 
-# Kasiksi-Test
+# Kasiski-Test
 
-```kasiski.py``` contains a simple implementation of the [Kasiksi-Examination](https://en.wikipedia.org/wiki/Kasiski_examination).
+```kasiski.py``` contains a simple implementation of the [Kasiksi-Examination](https://en.wikipedia.org/wiki/Kasiski_examination). This Code is part of the article, that appeared on c't 28/2023 S. 142. An online version can be found on [heise+](https://www.heise.de/hintergrund/Kryptografie-Vigenere-Chiffre-mit-dem-Kasiski-Test-knacken-9532220.html?seite=all).
 
 ## Usage
 
